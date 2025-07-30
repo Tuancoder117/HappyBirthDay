@@ -468,7 +468,6 @@ body {
     animation: scaleCricle 3s 15s forwards ease-in-out;
 }
 
-
 .box__letter{
     position: fixed;
     top: 0;
@@ -533,8 +532,7 @@ body {
 }
 .letter__border .letter .content__letter .left{
     position: relative;
-    width: 50%;
-    height: 100%;
+    height: auto;
     padding: 1.7rem;
     border-right: 3px solid var(--color-border);
 }
@@ -606,7 +604,7 @@ body {
     animation: opacityHeart 1s 1s forwards;
 }
 .content__letter .right .text__letter{
-    margin-top: 60px;
+    margin-top:  -30px;
     padding: 20px 15px 10px 15px;
     font-family: 'Dancing Script', cursive;
     font-size: 1.3rem;
@@ -717,8 +715,8 @@ body {
 
   .close {
     font-size: 28px;
-    top: 5px;
-    right: 10px;
+    top: 40px !important;
+    right: 30px !important;
   }
 }
 
@@ -749,8 +747,6 @@ body {
   transition: all 0.3s ease;
 }
 
-
-
 .hidden {
   opacity: 0;
   visibility: hidden;
@@ -776,8 +772,6 @@ body {
 /* Bộ sưu tập kỷ niệm */
 .memory-gallery {
   padding: 40px 20px;
-  background-color: #fff8f0;
-  text-align: center;
   font-family: 'Dancing Script', cursive;
 }
 
@@ -800,8 +794,24 @@ body {
 
 }
 
+.block{
+    position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;  
+}
+
+@media screen and (max-width:784px) {
+    .block{ 
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top:100%;
+        width: 150px;
+    }
+}
+
 .memory {
-  background-color: #ffeaea;
+  background-color: #faf4f4;
   border-radius: 20px;
   padding: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -973,7 +983,7 @@ body {
   position: fixed;
   width: 20px;
   height: 20px;
-  background-image: url('./images/heart.png');
+  background-image: url('./images/tim.png');
   background-size: cover;
   animation: popHeart 1s ease forwards;
   pointer-events: none;
@@ -1011,7 +1021,7 @@ body {
 }
 
 .love-note {
-      background: #fff0f6;
+background: #fff0f6;
   flex: 0 0 auto;
   white-space: nowrap;
   font-size: 1.4rem;
