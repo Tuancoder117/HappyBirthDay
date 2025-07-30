@@ -162,14 +162,17 @@ body {
     color: var(--color-text-pink);
 }
 
+
 .title .hat{
     position: absolute;
     right: 45px;
     top: -350px;
+    left: 220px;
     transform: rotate(-40deg);
     z-index: -1;
     animation: topHat 4s 7s forwards ease;
 }
+
 @keyframes topHat{
     20%, 30%{
         top: -10px;
@@ -181,6 +184,7 @@ body {
         transform: rotate(0deg);
     }
 }
+
 .date__of__birth, .name{
     display: flex;
     justify-content:space-around;
@@ -613,6 +617,26 @@ body {
     right: 0;
     opacity: 0;
 }
+.footer-message {
+    text-align: center;
+    padding: 30px 10px;
+    font-size: 1.2rem;
+    color: #ff69b4;
+    font-family: 'Dancing Script', cursive;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.footer-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hidden {
+    display: block; /* vẫn chiếm chỗ nhưng bị ẩn */
+}
+
 #mewmew.animationOp{
     animation: opacityHeart 1s 1s forwards;
 }
@@ -741,42 +765,269 @@ body {
   transition: all 0.3s ease;
 }
 
-.memory-gallery {
-  margin-top: 40px;
-  padding: 20px;
-  background: #fff5fa;
-  border-top: 2px dashed pink;
-  text-align: center;
+.bottom{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    margin-top: 50px;
 }
 
-.memory-gallery p{
-    font-family: 'Times New Roman', Times, serif;
-    font-size: medium;
-    font-weight: bold;
+/* Bộ sưu tập kỷ niệm */
+.memory-gallery {
+  padding: 40px 20px;
+  background-color: #fff8f0;
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
 }
 
 .memory-gallery h2 {
-  font-size: 28px;
-  color: #d63384;
-  margin-bottom: 20px;
-  font-family: 'Segoe UI', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #ff6b81;
+  font-weight: bold;
 }
 
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
-  padding: 0 20px;
+    position: relative;
+    display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 32px;
+  padding: 24px;
+  max-width: 1000px;
+  margin: 0 auto; 
+
 }
 
-.gallery-grid img {
+.memory {
+  background-color: #ffeaea;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin: auto;
+  
+}
+
+.memory:hover {
+  transform: translateY(-10px);
+}
+
+.memory img {
   width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: auto;
+  max-height: 400px; /* giới hạn chiều cao */
+  border-radius: 15px;
+  object-fit: cover;
+  display: block;
 }
 
-.gallery-grid img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+.memory p {
+  margin-top: 12px;
+  font-size: 1.05rem;
+  color: #333;
+  font-family: 'Sriracha', cursive;
+  word-break: break-word;
+  text-align: center;
 }
+
+.bottom h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  color: #ff7f9f;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Popup Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  padding-top: 60px;
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 90%;
+  width: 400px;
+  text-align: center;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.modal-content p {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  color: #444;
+  font-family: 'Sriracha', cursive;
+}
+
+.close-modal {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Mũi tên và dòng chữ hướng dẫn */
+.angle-hint {
+  position: absolute;
+  top: 70px;       /* chỉnh vị trí theo chiều dọc */
+  left: -20px !important;    /* đặt nằm ngoài phần ảnh */
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  animation: floatHint 2s ease-in-out infinite;
+}
+
+/* .hint-arrow {
+  font-size: 28px;
+  color: #ff3366;
+  transform: rotate(10deg); // xoay lại cho cân mũi tên 
+  margin-right: 8px;
+} */
+
+.hint-text {
+  font-size: 14px;
+  color: #444;
+  background-color: #fff5f8;
+  padding: 6px 10px;
+  border-radius: 8px;
+   transform: rotate(-15deg); /* xoay chéo mũi tên */
+  box-shadow: 0 0 8px rgba(255, 100, 150, 0.25);
+  white-space: nowrap;
+}
+
+/* Hiệu ứng nhẹ cho mũi tên */
+@keyframes floatHint {
+  0% { transform: rotate(-10deg) translateY(0); }
+  50% { transform: rotate(-10deg) translateY(-5px); }
+  100% { transform: rotate(-10deg) translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .memory {
+    width: 90%;
+    padding: 12px;
+  }
+
+  .angle-hint {
+    top: 40px;
+    left: 0px;
+    transform: rotate(-12deg);
+    font-size: 13px;
+    max-width: 140px;
+    padding: 4px 8px;
+  }
+
+  .hint-arrow {
+    font-size: 16px;
+    margin-right: 4px;
+  }
+}
+
+.footer-message {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+  text-align: center;
+  padding: 30px 10px;
+  font-size: 1.2rem;
+  color: #ff69b4;
+  font-family: 'Dancing Script', cursive;
+}
+
+.footer-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.click-heart {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background-image: url('./images/heart.png');
+  background-size: cover;
+  animation: popHeart 1s ease forwards;
+  pointer-events: none;
+}
+@keyframes popHeart {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+.sparkle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: url('./images/heart.png') no-repeat center;
+    background-size: contain;
+    pointer-events: none;
+    animation: sparkleFade 0.5s ease-out;
+  }
+  @keyframes sparkleFade {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(2); }
+  }
+
+.love-note-wrapper {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.love-note-track {
+  display: flex;
+  animation: scrollNotes 30s linear infinite;
+}
+
+.love-note {
+      background: #fff0f6;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  font-size: 1.4rem;
+  font-family: 'Dancing Script', cursive;
+  padding: 10px 40px;
+  color: #d63384;
+  border-bottom: 2px solid pink;
+  margin-right: 20px;
+}
+  
+@keyframes scrollNotes {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+

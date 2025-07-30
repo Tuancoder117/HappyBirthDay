@@ -12,6 +12,16 @@
     <audio id="myAudio" autoplay>
         <source src="./audio/sn.mp3" type="audio/mpeg">
     </audio>
+   <div class="love-note-wrapper">
+  <div class="love-note-track">
+    <div class="love-note">💌 Giang ơi, chúc mừng sinh nhật nhéeee 💕</div>
+    <div class="love-note">💌 Đỗ Nguyện Vọng 1 nhe 💕</div>
+    <div class="love-note">💌 Phải luôn luôn vui vẻ biết chưaaaa 💕</div>
+    <div class="love-note">💌 Tuổi mới, cứ sống đúng với mình là được - vậy là đủ tuyệt vời rồi 💕</div>
+     <div class="love-note">💌 Sẽ làm được tất cả mọi thứ mình mong muốn nha 💕</div>
+  </div>
+</div>
+
     <div id="wrapper">
         <div class="flag__birthday">
             <img src="./images/1.png" alt="" width="350" class="flag__left">
@@ -141,21 +151,78 @@
                 </div>
             </div>
         </div>
+
+        <div class="footer-message">
+            <p>💌 Lướt xuống bên dưới nữa nha 💫</p>
+        </div>
+
     </div>
 
     <div class="memory-gallery">
     <h2>📸 Kỷ niệm cùng Giang</h2>
     <div class="gallery-grid">
-        <img src="./images/memory (1).jpg" alt="Memory 1">
-        <p>PhotoBooth nèeeee</p>
-        <img src="./images/memory (2).jpg" alt="Memory 2">
-        <p>Ảnh Tứn chụp ở Hội An nèeeee</p>
-        <img src="./images/memory (3).jpg" alt="Memory 3">
-        <p>Thành quả chờ đợi 30ph ở PhotoBooth</p>
-        <img src="./images/memory (4).jpg" alt="Memory 4">
-        <p>Làm màu đồ đó</p>
-        <!-- Thêm ảnh khác nếu muốn -->
+
+            <div class="angle-hint">
+                <div class="hint-text">Bấm vào ảnh để thấy điều bất ngờ 🎁</div>
+            </div>
+
+        <div class="memory" data-date="2025-07-06">
+            <img src="./images/memory (1).jpg" alt="Memory 1">
+            <p>PhotoBooth nèeeee</p>
+            
+        </div>
+
+        <div class="memory"  data-date="2025-07-15">
+            <img src="./images/memory (2).jpg" alt="Memory 2">
+            <p>Ảnh Tứn chụp ở Hội An nèeeee</p>
+        </div>
+
+        <div class="memory" data-date="2025-07-06">
+            <img src="./images/memory (3).jpg" alt="Memory 3">
+            <p>Thành quả chờ đợi 30ph ở PhotoBooth</p>
+        </div>
+        
+        <div class="memory" data-date="2025-07-06">   
+            <img src="./images/memory (4).jpg" alt="Memory 4">
+            <p>Làm màu đồ đó</p>
+        </div>
+
+        <div class="memory" data-date="2025-07-24">   
+            <img src="./images/memory (5).jpg" alt="Memory 4">
+            <p>Câu cá mà người có chút ét vậy đó</p>
+        </div>
+
+        <div class="memory" data-date="2025-07-15">   
+            <img src="./images/memory (6).jpg" alt="Memory 4">
+            <p>Bắt đầu của một ngày đi bộ rớt chân=))</p>
+        </div>
+
+        <div class="memory" data-date="2025-07-06">   
+            <img src="./images/memory (7).jpg" alt="Memory 4">
+            <p>Đi xem cầu rồng nghe giá ly nước hết hồn lìn</p>
+        </div>
+
+        <div class="memory" data-date="2025-07-15">
+            <img src="./images/memory (8).jpg" alt="Memory 1">
+            <p>Nhậu cùng nhau nè</p>
+        </div>
+
+        <div class="memory" data-date="2025-05-11">
+            <img src="./images/memory (9).jpg" alt="Memory 1">
+            <p>Tự nhiên được rủ đi chụp kỉ yếu =))</p>
+        </div>
     </div>
+
+    <!-- Popup Modal -->
+<div id="memoryModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <img id="modal-img" src="" alt="">
+    <p id="modal-caption"></p>
+    <p id="modal-date" style="color: #888; font-size: 14px; margin-top: 5px;"></p>
+  </div>
+</div>
+
 </div>
 
 </body>
@@ -260,11 +327,69 @@ function createHeart() {
   setTimeout(() => heart.remove(), 2000);
 }
 
-// Gọi khi bấm nút mở thư
-document.querySelector(".btn__letter").addEventListener("click", () => {
-  const interval = setInterval(createHeart, 200);
-  setTimeout(() => clearInterval(interval), 3000);
+setTimeout(() => {
+    document.querySelector('.footer-message').classList.add('show');
+  }, 15000);
+// Popup Modal for Memory
+document.querySelectorAll('.memory').forEach(item => {
+  item.addEventListener('click', () => {
+    const imgSrc = item.querySelector('img').src;
+    const caption = item.querySelector('p').textContent;
+    document.getElementById('modal-img').src = imgSrc;
+    document.getElementById('modal-caption').textContent = caption;
+    document.getElementById('memoryModal').style.display = 'block';
+  });
 });
+
+document.querySelector('.close-modal').addEventListener('click', () => {
+  document.getElementById('memoryModal').style.display = 'none';
+});
+
+// Đóng khi bấm bên ngoài popup
+window.addEventListener('click', function(e) {
+  const modal = document.getElementById('memoryModal');
+  if (e.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+document.querySelectorAll('.memory').forEach(item => {
+  item.addEventListener('click', () => {
+    const imgSrc = item.querySelector('img').src;
+    const caption = item.querySelector('p').textContent;
+    const date = item.dataset.date || "Không rõ ngày";
+
+    document.getElementById('modal-img').src = imgSrc;
+    document.getElementById('modal-caption').textContent = caption;
+    document.getElementById('modal-date').textContent = "📅 " + formatDate(date);
+
+    document.getElementById('memoryModal').style.display = 'block';
+  });
+});
+
+function formatDate(dateStr) {
+  const options = { day: '2-digit', month: 'long', year: 'numeric' };
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('vi-VN', options);
+}
+
+document.addEventListener('click', (e) => {
+  const heart = document.createElement('div');
+  heart.className = 'click-heart';
+  heart.style.left = e.clientX + 'px';
+  heart.style.top = e.clientY + 'px';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 1000);
+});
+
+document.addEventListener('mousemove', e => {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = e.pageX + 'px';
+    sparkle.style.top = e.pageY + 'px';
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 500);
+  });
 
 </script>
 </html>
