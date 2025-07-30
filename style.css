@@ -1017,26 +1017,15 @@ body {
 
 .love-note-track {
   display: flex;
-  animation: scrollNotes 5s linear infinite;
+  width: max-content;
+  animation: scrollNotes 20s linear infinite;
 }
 
-.love-note {
-background: #fff0f6;
-  flex: 0 0 auto;
-  white-space: nowrap;
-  font-size: 1.4rem;
-  font-family: 'Dancing Script', cursive;
-  padding: 10px 40px;
-  color: #d63384;
-  border-bottom: 2px solid pink;
-  margin-right: 20px;
-}
-  
 @keyframes scrollNotes {
   0% {
-    transform: translateX(0);
+    transform: translateX(0%);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
