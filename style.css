@@ -1017,7 +1017,7 @@ body {
 
 .love-note-track {
   display: flex;
-  animation: scrollNotes 10s linear infinite;
+  animation: scrollNotes 5s linear infinite;
 }
 
 .love-note {
