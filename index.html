@@ -12,6 +12,13 @@
     <audio id="myAudio" autoplay>
         <source src="./audio/sn.mp3" type="audio/mpeg">
     </audio>
+    <div id="gift-screen">
+    <div class="gift-box" onclick="openGift()">
+      🎁
+      <p>Bấm để mở quà</p>
+    </div>
+
+     <div id="main-content" style="display: none;">
    <div class="love-note-wrapper">
   <div class="love-note-track">
     <div class="love-note">💌 Giang ơi, chúc mừng sinh nhật nheee 💕</div>
@@ -243,7 +250,7 @@
 </div>
 
 </div>
-
+</div>
 </body>
 <script>
     window.onload = function() {
@@ -409,6 +416,21 @@ document.addEventListener('mousemove', e => {
     document.body.appendChild(sparkle);
     setTimeout(() => sparkle.remove(), 500);
   });
+
+  function openGift() {
+    const giftScreen = document.getElementById("gift-screen");
+    const mainContent = document.getElementById("main-content");
+
+    // Tùy bạn: thêm hiệu ứng trước khi chuyển
+    giftScreen.classList.add("fade-out");
+
+    // Sau 1.5s ẩn hộp quà và hiện nội dung
+    setTimeout(() => {
+      giftScreen.style.display = "none";
+      mainContent.style.display = "block";
+    }, 1500);
+  }
+
 
 </script>
 </html>
