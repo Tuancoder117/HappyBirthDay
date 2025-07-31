@@ -432,6 +432,12 @@ document.addEventListener('mousemove', e => {
     }, 1500);
   }
 
+     function openGift() {
+      document.getElementById('gift-screen').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+      setTimeout(() => window.dispatchEvent(new Event('resize')), 100); // cập nhật lại layout
+    }
+
 
 </script>
 </html>
