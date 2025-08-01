@@ -292,6 +292,7 @@
     var intervalContent;
     var intervalTitle;
     $("#btn__letter").on("click", function(){
+          $(".love-note-wrapper").hide(); // Ẩn dòng chạy
         $(".box__letter").slideDown()
         setTimeout(function(){
             $(".letter__border").slideDown();
@@ -332,6 +333,7 @@
         },6000)
     })
     $(".close").on("click", function(){
+        $(".love-note-wrapper").show(); // Hiện lại dòng chạy
         clearInterval(intervalContent)
         document.querySelector(".title__letter").textContent = "";
         text__letter.textContent = "";
